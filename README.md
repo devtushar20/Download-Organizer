@@ -1,4 +1,4 @@
-# Downloads Organizer
+# Download Organizer
 
 A Windows Python utility that watches the user's `Downloads` folder and sorts files into category, year, and month directories.
 
