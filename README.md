@@ -75,25 +75,6 @@ report_1.pdf
 report_2.pdf
 ```
 
-## Current Implementation Issue
-
-The current version of `organizer.py` calculates the category and date strings but does not define `destination_folder` before calling `get_unique_path()`. As a result, organizing a file reaches a `NameError` instead of moving it.
-
-The organizing function needs to construct the destination directory before calculating the unique target path. The intended destination is:
-
-```python
-destination_folder = DOWNLOADS_DIR / target_category / year_str / month_str
-destination_folder.mkdir(parents=True, exist_ok=True)
-```
-
-This should be added before:
-
-```python
-target_path = get_unique_path(destination_folder, file_path.name)
-```
-
-Until that fix is applied, the watcher may start but cannot successfully organize files.
-
 ## Operational Notes
 
 - The watcher monitors only the top level of the Downloads folder; it does not recursively monitor existing category folders.

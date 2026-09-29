@@ -82,12 +82,14 @@ def move_file_to_category(file_path: Path, notify: bool = True):
             target_category = category
             break
 
-    # 2. Date-based grouping: e.g. Downloads/Images/2026/September
-  # 2. Date-based grouping based on actual file modification date
-        file_mtime = file_path.stat().st_mtime
-        file_date = datetime.fromtimestamp(file_mtime)
-        year_str = file_date.strftime("%Y")
-        month_str = file_date.strftime("%B")
+    # 2. Date-based grouping based on actual file modification date
+    file_mtime = file_path.stat().st_mtime
+    file_date = datetime.fromtimestamp(file_mtime)
+    year_str = file_date.strftime("%Y")
+    month_str = file_date.strftime("%B")
+
+    destination_folder = DOWNLOADS_DIR / target_category / year_str / month_str
+    destination_folder.mkdir(parents=True, exist_ok=True)
     target_path = get_unique_path(destination_folder, file_path.name)
 
     try:
